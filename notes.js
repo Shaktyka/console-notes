@@ -3,6 +3,7 @@ const fs = require(`fs`);
 const path = require(`path`);
 const notePath = path.join(__dirname, `notes.json`);
 
+// Прочитать содержимое файла с заметками
 const getNotes = (cb) => {
   fs.readFile(notePath, `utf-8`, (err, content) => {
     if (err) {
@@ -17,6 +18,7 @@ const getNotes = (cb) => {
   });
 };
 
+// Сохранить заметку
 const saveNotes = (content) => {
   fs.writeFile(notePath, JSON.stringify(content), (err) => {
     if (err) {
@@ -25,6 +27,7 @@ const saveNotes = (content) => {
   });
 };
 
+// Добавить заметку
 const addNote = (title, text) => {
   getNotes((notes) => {
     const dublicateNote = notes.find(note => note.title === title);
@@ -38,9 +41,10 @@ const addNote = (title, text) => {
   });
 };
 
+// Прочитать список всех заметок
 const listNotes = () => {
   getNotes((notes) => {
-    if (notes.length > 0) {
+    if (notes.length) {
       notes.forEach((note) => {
         console.log(note.title);
       });
@@ -50,11 +54,11 @@ const listNotes = () => {
   });
 };
 
+// Прочесть заметку по переданному title
 const readNote = (title) => {
   getNotes((notes) => {
     const note = notes.find((n) => n.title === title);
     if (note) {
-      console.log(chalk.orange(`Заметка:`));
       console.log(note.title);
       console.log(note.text);
     } else {
@@ -63,6 +67,7 @@ const readNote = (title) => {
   });
 };
 
+// Удалить заметку
 const deleteNote = (title) => {
   
 };
