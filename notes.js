@@ -40,8 +40,7 @@ const addNote = (title, text) => {
 
 const listNotes = () => {
   getNotes((notes) => {
-    if (notes.length) {
-      console.log(chalk.orange(`Ваши заметки:`));
+    if (notes.length > 0) {
       notes.forEach((note) => {
         console.log(note.title);
       });
