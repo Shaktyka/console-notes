@@ -1,6 +1,9 @@
 const chalk = require(`chalk`);
 const fs = require(`fs`);
 const path = require(`path`);
+const moment = require(`moment`);
+moment().format();
+
 const notePath = path.join(__dirname, `notes.json`);
 
 // Прочитать содержимое файла с заметками
@@ -34,7 +37,8 @@ const addNote = (title, text) => {
     if (dublicateNote) {
       console.log(chalk.red.inverse(`Заметка с таким названием уже существует`));
     } else {
-      notes.push({title, text});
+      const dateNow = moment().valueOf();
+      notes.push({title, text, date:dateNow});
       saveNotes(notes);
       console.log(chalk.green.inverse(`Заметка добавлена`));
     }
@@ -46,7 +50,7 @@ const listNotes = () => {
   getNotes((notes) => {
     if (notes.length) {
       notes.forEach((note) => {
-        console.log(note.title);
+        console.log(chalk.gray(moment(note.date).format(`YYYY:MM:DD HH:mm:ss`)), note.title);
       });
     } else {
       console.log(chalk.blue(`Заметок пока нет, добавьте первую`));
@@ -59,6 +63,7 @@ const readNote = (title) => {
   getNotes((notes) => {
     const note = notes.find((n) => n.title === title);
     if (note) {
+      console.log(moment(note.date).format(`YYYY:MM:DD HH:mm:ss`));
       console.log(note.title);
       console.log(note.text);
     } else {
@@ -69,7 +74,15 @@ const readNote = (title) => {
 
 // Удалить заметку
 const deleteNote = (title) => {
-  
+  getNotes((notes) => {
+    const updatedNotes = notes.filter((note) => note.title !== title);
+    if (updatedNotes.length !== notes.length) {
+      saveNotes(updatedNotes);
+      console.log(chalk.green(`Заметка с названием "${title}" успешно удалена`));
+    } else {
+      console.log(chalk.red(`Заметка с названием "${note.title}" не найдена`));
+    }
+  });
 };
 
 module.exports = {
