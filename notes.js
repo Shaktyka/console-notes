@@ -58,6 +58,17 @@ const listNotes = () => {
   });
 };
 
+// Очистить список всех заметок
+const clearNotes = () => {
+  fs.writeFile(notePath, [], (err) => {
+  if (err) {
+      throw new Error(err);
+  } else {
+    console.log(chalk.red(`Все заметки удалены, добавьте новую.`));
+  }
+});
+};
+
 // Прочесть заметку по переданному title
 const readNote = (title) => {
   getNotes((notes) => {
@@ -89,5 +100,6 @@ module.exports = {
   addNote,
   listNotes,
   readNote,
-  deleteNote
+  deleteNote,
+  clearNotes
 };

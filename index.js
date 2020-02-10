@@ -62,4 +62,12 @@ yargs.command({
   }
 });
 
+yargs.command({
+  command: `clear-all`,
+  describe: `Удалить весь список заметок`,
+  handler() {
+    notes.clearNotes();
+  }
+});
+
 yargs.parse();
