@@ -60,7 +60,7 @@ const listNotes = () => {
 
 // Очистить список всех заметок
 const clearNotes = () => {
-  fs.writeFile(notePath, [], (err) => {
+  fs.writeFile(notePath, ``, (err) => {
   if (err) {
       throw new Error(err);
   } else {
