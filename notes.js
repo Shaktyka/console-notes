@@ -31,14 +31,14 @@ const saveNotes = (content) => {
 };
 
 // Добавить заметку
-const addNote = (title, text) => {
+const addNote = (cat, title, text) => {
   getNotes((notes) => {
     const dublicateNote = notes.find(note => note.title === title);
     if (dublicateNote) {
       console.log(chalk.red.inverse(`Заметка с таким названием уже существует`));
     } else {
       const dateNow = moment().valueOf();
-      notes.push({title, text, date:dateNow});
+      notes.push({cat, title, text, date:dateNow});
       saveNotes(notes);
       console.log(chalk.green.inverse(`Заметка добавлена`));
     }
@@ -55,7 +55,7 @@ const listNotes = () => {
       notes.map((note) => {
         note.date = moment(note.date).format(`DD:MM:YYYY HH:mm:ss`);
       });
-      console.table(notes, [`date`, `title`, `text`]);
+      console.table(notes, [`date`, `cat`, `title`, `text`]);
     } else {
       console.log(chalk.blue(`Заметок пока нет, добавьте первую`));
     }

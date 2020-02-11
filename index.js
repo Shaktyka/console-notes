@@ -8,6 +8,11 @@ yargs.command({
   command: `add`,
   describe: `Добавить новую заметку`,
   builder: {
+    cat: {
+      type: `string`,
+      demandOption: true,
+      describe: `Категория заметки`
+    },
     title: {
       type: `string`,
       demandOption: true,
@@ -19,8 +24,8 @@ yargs.command({
       describe: `Текст заметки`
     }
   },
-  handler({title, text}) {
-    notes.addNote(title, text);
+  handler({cat, title, text}) {
+    notes.addNote(cat, title, text);
   }
 });
 
