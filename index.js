@@ -31,7 +31,7 @@ yargs.command({
 
 yargs.command({
   command: `list`,
-  describe: `Показать список заметок`,
+  describe: `Показать весь список заметок`,
   handler() {
     notes.listNotes();
   }
@@ -39,7 +39,7 @@ yargs.command({
 
 yargs.command({
   command: `read`,
-  describe: `Показать контент выбранной заметки`,
+  describe: `Показать название выбранной заметки`,
   builder: {
     title: {
       type: `string`,
