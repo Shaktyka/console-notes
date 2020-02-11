@@ -50,7 +50,7 @@ const listNotes = () => {
   getNotes((notes) => {
     if (notes.length) {
       notes.forEach((note) => {
-        console.log(chalk.gray(moment(note.date).format(`YYYY:MM:DD HH:mm:ss`)), note.title);
+        console.log(chalk.gray(moment(note.date).format(`DD:MM:YYYY HH:mm:ss`)), note.title);
       });
     } else {
       console.log(chalk.blue(`Заметок пока нет, добавьте первую`));
@@ -74,7 +74,7 @@ const readNote = (title) => {
   getNotes((notes) => {
     const note = notes.find((n) => n.title === title);
     if (note) {
-      console.log(moment(note.date).format(`YYYY:MM:DD HH:mm:ss`));
+      console.log(moment(note.date).format(`DD:MM:YYYY HH:mm:ss`));
       console.log(note.title);
       console.log(note.text);
     } else {
