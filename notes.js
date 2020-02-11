@@ -49,9 +49,13 @@ const addNote = (title, text) => {
 const listNotes = () => {
   getNotes((notes) => {
     if (notes.length) {
-      notes.forEach((note) => {
-        console.log(chalk.gray(moment(note.date).format(`DD:MM:YYYY HH:mm:ss`)), note.title);
+      // notes.forEach((note) => {
+      //   console.log(chalk.gray(moment(note.date).format(`DD:MM:YYYY HH:mm:ss`)), note.title);
+      // });
+      notes.map((note) => {
+        note.date = moment(note.date).format(`DD:MM:YYYY HH:mm:ss`);
       });
+      console.table(notes, [`date`, `title`, `text`]);
     } else {
       console.log(chalk.blue(`Заметок пока нет, добавьте первую`));
     }
