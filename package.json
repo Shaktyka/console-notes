@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^3.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "yargs": "^15.1.0"
   }
 }
